@@ -1,8 +1,8 @@
 const buttons = document.querySelectorAll('.drum');
 
-document.addEventListener('keydown', event => {
+const makeSound = expression => {
 	let audio;
-	switch (event.key) {
+	switch (expression) {
 		case 'w':
 			audio = new Audio(`sounds/tom-1.mp3`);
 			audio.play();
@@ -35,40 +35,14 @@ document.addEventListener('keydown', event => {
 		default:
 			break;
 	}
+};
+
+document.addEventListener('keydown', event => {
+	makeSound(event.key);
 });
 
 for (let i = 0; i < buttons.length; i++) {
 	buttons[i].addEventListener('click', function () {
-		const { innerHTML } = this;
-
-		let soundFile;
-		switch (innerHTML) {
-			case 'w':
-				soundFile = 'tom-1';
-				break;
-			case 'a':
-				soundFile = 'tom-2';
-				break;
-			case 's':
-				soundFile = 'tom-3';
-				break;
-			case 'd':
-				soundFile = 'tom-4';
-				break;
-			case 'j':
-				soundFile = 'snare';
-				break;
-			case 'k':
-				soundFile = 'crash';
-				break;
-			case 'l':
-				soundFile = 'kick-bass';
-				break;
-			default:
-				break;
-		}
-
-		const audio = new Audio(`sounds/${soundFile}.mp3`);
-		audio.play();
+		makeSound(this.innerHTML);
 	});
 }
