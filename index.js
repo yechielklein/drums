@@ -37,12 +37,23 @@ const makeSound = expression => {
 	}
 };
 
+const animateButton = key => {
+	const pressedButton  = document.querySelector(`.${key}`)
+	pressedButton.classList.add('pressed');
+
+	setTimeout(() => {
+		pressedButton.classList.remove('pressed');
+	}, 100);
+};
+
 document.addEventListener('keydown', event => {
 	makeSound(event.key);
+	animateButton(event.key)
 });
 
 for (let i = 0; i < buttons.length; i++) {
 	buttons[i].addEventListener('click', function () {
 		makeSound(this.innerHTML);
+		animateButton(this.innerHTML);
 	});
 }
